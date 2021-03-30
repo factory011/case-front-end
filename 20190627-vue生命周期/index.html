@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <link href='https://cdn.bootcss.com/minireset.css/0.0.2/minireset.css' rel='stylesheet'>
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{message}}</p>
+    <button @click="modify()">修改message值为gril</button>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'father',
+      show: true
+    },
+    // 完成实例初始化，初始化非响应式变量
+    // this指向创建的实例；
+    // 可以在这加个loading事件；
+    // data computed watch methods上的方法和数据均不能访问
+    beforeCreate() {
+      console.log('beforeCreate 创建前状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.table(state);
+    },
+    // 实例创建完成
+    // 完成数据(data props computed)的初始化 导入依赖项。
+    // 可访问data computed watch methods上的方法和数据
+    // 未挂载DOM,不能访问$el,$ref为空数组
+    // 可在这结束loading，还做一些初始化，实现函数自执行,
+    // 可以对data数据进行操作，可进行一些请求，请求不易过多，避免白屏时间太长。
+    // 若在此阶段进行的 DOM 操作一定要放在 Vue.nextTick() 的回调函数中
+    created() {
+      console.log('created 创建完毕状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 有了el,编译了template|/outerHTML
+    // 能找到对应的template,并编译成render函数
+    // 优先级：render函数选项  > template选项  >  outer Html
+    beforeMount() {
+      console.log('beforeMount 挂载前状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 完成创建vm.$el，和双向绑定，
+    // 完成挂载DOM 和渲染;可在mounted钩子对挂载的dom进行操作
+    // 即有了DOM 且完成了双向绑定 可访问DOM节点,$ref
+    // 可在这发起后端请求，拿回数据，配合路由钩子做一些事情；
+    // 可对DOM 进行操作
+    mounted() {
+      console.log('mounted 挂载结束状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 数据更新之前
+    // 可在更新前访问现有的DOM,如手动移除添加的事件监听器；
+    beforeUpdate() {
+      console.log('beforeUpdate 更新前状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 完成虚拟DOM的重新渲染和打补丁；
+    // 组件DOM 已完成更新；
+    // 可执行依赖的dom 操作
+    // 注意：不要在此函数中操作数据，会陷入死循环的。
+    updated() {
+      console.log('updated 更新完成状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 在执行app.$destroy()之前
+    // 可做一些删除提示，如：你确认删除XX吗？ 
+    // 可用于销毁定时器，解绑全局时间 销毁插件对象
+    beforeDestroy() {
+      console.log('beforeDestroy 销毁前状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    // 当前组件已被删除，销毁监听事件 组件 事件 子实例也被销毁
+    destroyed() {
+      console.log('destroyed 销毁完成状态===============》');
+      var state = {
+        'el': this.$el,
+        'data': this.$data,
+        'message': this.message
+      }
+      console.log(state);
+    },
+    methods: {
+      modify() {
+        this.message = 'gril'
+      }
+    },
+  });
+</script>
+
+</html>

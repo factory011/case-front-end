@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/main.css">
+  <title>列表</title>
+</head>
+
+<div id="app">
+  <!-- 引用组件,list参数传入子组件，@ok、@cancel定义子组件发送的方法 -->
+  <card :list="list" @ok="okMethods" @cancel="cancelMethods"></card>
+</div>
+
+<body>
+  <!-- 引入vuejs和组件 -->
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <script src="component/card.js"></script>
+  <script>
+    // vue初始化
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list: [1, 2, 3]
+      },
+      methods: {
+        okMethods() {
+          // 处理数组为空的异常情况
+          // Math.max.apply(null, [])的输出结果为-Infinity
+          if (this.list.length === 0) {
+            return this.list = [1]
+          }
+          // 根据数组最大值在末尾添加一项数据
+          this.list.push(Math.max.apply(null, this.list) + 1)
+        },
+        cancelMethods() {
+          // 从数组末尾删除一项数据
+          this.list.pop()
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
